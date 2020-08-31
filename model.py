@@ -5,51 +5,6 @@ import utils
 import numpy as np
 from loss import *
 
-class Model(nn.Module):
-    def __init__(self, config, data_setting):
-        super(Model, self).__init__()
-
-        # --- Model hyperparameters ---
-        self._BATCH_SIZE = config["training"]["batch_size"]
-        self._LOSS_NAME = config["training"]["loss_name"]
-        self._N_EPOCHS = config["training"]["n_epochs"]
-        self._N_LAYERS = config["model"]["n_layers"]
-        self._DROPOUT_PROB = config["model"]["dropout_probability"]
-        self._ORTHO_INIT = config["model"]["ortho_init"]
-        self._EMBED_DIM = config["model"]["embed_dim"]
-        self.HIDDEN_DIM = config["model"]["hidden_dim"]
-        self._NOISIN = config["model"]["noisin"]
-        self._CELL_TYPE = config["model"]["cell_type"]
-
-        # --- data setting ---
-        self._MULTILABEL = data_setting["MULTILABEL"]
-        self._N_FEATURES = data_setting["N_FEATURES"]
-        self._N_CLASSES = data_setting["N_CLASSES"]
-        self._VAR_LEN = data_setting["VAR_LEN"]
-        self._outrow = []
-
-        self._CUDA = torch.cuda.is_available()
-        if self._CUDA:
-            self._device = torch.device("cuda")
-        else:
-            self._device = torch.device("cpu")
-
-        # --- general mappings ---
-        if self._MULTILABEL:
-            self.out_nonlin = nn.Sigmoid()
-        else:
-            self.out_nonlin = nn.Softmax(dim=1)
-            self._LOSS_NAME = "crossentropy"
-
-
-    def computeLoss(self, y_hat, y):
-        BCE = torch.nn.BCELoss()
-        loss = BCE(y_hat, y.float())
-        return loss
-
-    def modifyGradients(self):
-        pass
-
 class RHC(nn.Module):
     def __init__(self, ninp, nhid, nclasses, nepochs=0, lam=0.0):
         """
