@@ -1,7 +1,6 @@
 import torch
 from torch import nn
 from modules import *
-import utils
 import numpy as np
 from loss import *
 
