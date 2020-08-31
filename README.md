@@ -6,6 +6,8 @@ Please contact Tom Hartvigsen (twhartvigsen@wpi.edu) with any questions.
 Examples of code use will be coming soon. For now, this model can effectively be used in
 lieu of an RNN in pytorch:
 ```
+from model import RHC
+
 RHC = RHC(ninp, nhid, nclasses) # ninp is the number of variables, nhid is the hidden state size of the rnn, nclasses is the number of classes you want RHC to predict
 logits = RHC(X) # where X is a tensor of time series of shape (timesteps, instances, variables)
 ```
