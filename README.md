@@ -31,3 +31,5 @@ If you find this code helpful, feel free to cite our paper:
   year={2020}
 }
 ```
+
+**Tom Hartvigsen will be adding train/test scripts soon -- for now, please check out some analogous code for our [EARLIEST paper](https://github.com/Thartvigsen/EARLIEST)**
